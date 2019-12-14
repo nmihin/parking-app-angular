@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" *ngIf="currentUser">
+        <button mat-button [routerLinkActive]="['active']" [routerLink]="'/home'">
+          Home
+        </button>
+        <button mat-button [routerLinkActive]="['active']" [routerLink]="'/areas'">
+          Areas
+        </button>
+        <span>GZA Rheinfelden - Prototype V.1.0.</span>
+        <button class="logout" mat-button (click)="logout()">
+          Logout
+        </button>
+</mat-toolbar>
+<!--<app-content>loading...</app-content>-->
+<router-outlet></router-outlet>

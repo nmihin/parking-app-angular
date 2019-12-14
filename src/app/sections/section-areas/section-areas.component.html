@@ -1,0 +1,99 @@
+<section id="main-content" class="container-fluid" *ngIf="currentUser">
+  <mat-card class="main-card">
+    <div class="row split">
+      <as-split direction="{{layoutOrientation}}">
+        <as-split-area size="50">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="mapouter">
+              <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[18]"
+                [center]="[7.757730414581299, 47.54618508300781]" [maxZoom]="18" [minZoom]="18">
+                <span *ngFor="let sig of _parkingSpaces">
+                  <span *ngFor="let sen of sig.sensors">
+                    <mgl-marker [lngLat]="[sen.longitude,sen.latitude]">
+                      <span class="{{sen.occupied}} configured-{{sen.configured}} sensors-parking__sensor"></span>
+                    </mgl-marker>
+                  </span>
+                  <span>
+                    <mgl-marker [lngLat]="[sig.longitude,sig.latitude]">
+                      <span class="sector-{{sig.id}} {{sig.occupancy}} sensors-parking__sector"></span>
+                    </mgl-marker>
+                  </span>
+                </span>
+                <mgl-marker *ngFor="let sig of _barriers" [lngLat]="[sig.longitude,sig.latitude]">
+                  <span class="barriers-parking__sector">
+                      <img _ngcontent-gxh-c3="" class="ramp-icon__pillar" src="/assets/pillar.png">
+                      <img _ngcontent-gxh-c3="" class="ramp-icon__barrier" src="/assets/barrier.png">
+                    </span>
+                </mgl-marker>
+              </mgl-map>
+            </div>
+          </div>
+        </as-split-area>
+        <as-split-area size="50">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-card__content">
+            <mat-card>
+              <mat-tab-group>
+                <span class="main-card__content__areas" *ngFor="let sig of _summary.data.parkingAreas">
+                  <mat-tab label="{{sig.name}}">
+                    <div class="row">
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-tab__spaces total">
+                        <mat-card-title>{{sig.totalParkingSpaces}}</mat-card-title>
+                        <mat-card-subtitle>Total Spaces</mat-card-subtitle>
+                      </div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-tab__spaces free">
+                        <mat-card-title>{{sig.freeSpacesCount}}</mat-card-title>
+                        <mat-card-subtitle>Free Spaces</mat-card-subtitle>
+                      </div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-tab__spaces used">
+                        <mat-card-title>{{sig.occupiedSpacesCount}}</mat-card-title>
+                        <mat-card-subtitle>Used Spaces</mat-card-subtitle>
+                      </div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-tab__spaces fail">
+                        <mat-card-title>{{sig.defectiveSpacesCount}}</mat-card-title>
+                        <mat-card-subtitle>Defective Spaces</mat-card-subtitle>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <table class="mat-table sensors-card">
+                        <tr class="mat-header-row row">
+                          <td
+                            class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mat-cell mat-header-cell cdk-column-position mat-column-position">
+                            Name
+                          </td>
+                          <td
+                            class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mat-cell mat-header-cell cdk-column-position mat-column-position">
+                            Occupancy
+                          </td>
+                          <td
+                            class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mat-cell mat-header-cell cdk-column-position mat-column-position">
+                            Sensors
+                          </td>
+                        </tr>
+                        <tr class="mat-row row" *ngFor="let ag of _parkingSpacesAreas">
+                          <td *ngIf="ag.externalId == sig.externalId"
+                            class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mat-cell cdk-column-position mat-column-position">
+                            {{ag.name}}
+                          </td>
+                          <td *ngIf="ag.externalId == sig.externalId"
+                            class="col-xs-4 col-sm-4 col-md-4 col-lg-4  mat-cell cdk-column-position mat-column-position">
+                            {{ag.occupancy}}
+                          </td>
+                          <td *ngIf="ag.externalId == sig.externalId"
+                            class="col-xs-4 col-sm-4 col-md-4 col-lg-4  mat-cell cdk-column-position mat-column-position">
+                            <span *ngFor="let sen of ag.sensors | orderBy:'name'" data-id="{{sen.deviceInstanceId}}"
+                              class="{{sen.occupied}} configured-{{sen.configured}}">
+                            </span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </mat-tab>
+                </span>
+              </mat-tab-group>
+            </mat-card>
+          </div>
+        </as-split-area>
+      </as-split>
+    </div>
+  </mat-card>
+</section>

@@ -1,0 +1,194 @@
+<section id="main-content" class="container-fluid" *ngIf="currentUser">
+  <!--<button (click)="getConnectivity()">{{currentUser.token}}</button>
+  <button mat-raised-button color="primary" (click)="showNotification('1','Error')">
+    error
+  </button>
+  <button mat-raised-button color="primary" (click)="showNotification('2','Information')">
+    info
+  </button>
+  <button mat-raised-button color="primary" (click)="showNotification('3','Success')">
+    success
+  </button>
+  <button mat-raised-button color="primary" (click)="showNotification('4','Warnning')">
+    warnning
+  </button>-->
+  <mat-card class="main-card">
+    <div class="row split">
+      <as-split direction="{{layoutOrientation}}">
+        <as-split-area size="50">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="mapouter">
+              <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[18]"
+                [center]="[7.757730414581299, 47.54618508300781]" [maxZoom]="18" [minZoom]="18">
+                <span *ngFor="let sig of dataSourceSensors.data">
+                  <mgl-marker [lngLat]="[sig.longitude,sig.latitude]">
+                    <span class="sector-{{sig.id}} {{sig.occupancy}} sensors-parking__sector"></span>
+                  </mgl-marker>
+                  <mgl-marker class="sensors-parking__sensor" *ngFor="let ps of sig.sensors"
+                    [lngLat]="[ps.longitude,ps.latitude]"><span class="{{ps.occupied}} sensors-parking__sensor"></span>
+                  </mgl-marker>
+                </span>
+              </mgl-map>
+            </div>
+          </div>
+        </as-split-area>
+        <as-split-area size="50">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-card__content">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <mat-card class="ngx-charts">
+                  <ngx-charts-bar-vertical-normalized [scheme]="colorScheme" [results]="chart_data" [xAxis]="true"
+                    [yAxis]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Time - last 12 hours'"
+                    [yAxisLabel]="'Free / Used Spaces'">
+                  </ngx-charts-bar-vertical-normalized>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <mat-card>
+                  <img class="main-card__content__icons cars" src="/assets/parking-cars.svg" />
+                  <mat-card-title>{{_summary.data.totalSpacesCount}}</mat-card-title>
+                  <mat-card-subtitle>Total Spaces</mat-card-subtitle>
+                </mat-card>
+              </div>
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <mat-card>
+                  <img class="main-card__content__icons free" src="/assets/parking-free.svg" />
+                  <mat-card-title>{{_summary.data.freeSpacesCount}}</mat-card-title>
+                  <mat-card-subtitle>Free Spaces</mat-card-subtitle>
+                </mat-card>
+              </div>
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <mat-card>
+                  <img class="main-card__content__icons used" src="/assets/parking-not-free.svg" />
+                  <mat-card-title>{{_summary.data.occupiedSpacesCount}}</mat-card-title>
+                  <mat-card-subtitle>Used Spaces</mat-card-subtitle>
+                </mat-card>
+              </div>
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <mat-card>
+                  <img class="main-card__content__icons fail" src="/assets/parking-cars.svg" />
+                  <mat-card-title>{{_summary.data.defectiveSpacesCount}}</mat-card-title>
+                  <mat-card-subtitle>Sensor Fail</mat-card-subtitle>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <mat-card>
+                  <mat-card-title>Parking area</mat-card-title>
+                  <table class="mat-table">
+                    <tr class="mat-header-row">
+                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                        Name
+                      </td>
+                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                        Free
+                      </td>
+                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                        Occupied
+                      </td>
+                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                        Total
+                      </td>
+                    </tr>
+                    <tr class="mat-row" *ngFor="let sig of _summary.data.parkingAreas">
+                      <td class="mat-cell cdk-column-position mat-column-position">
+                        {{sig.name}}
+                      </td>
+                      <td class="mat-cell cdk-column-position mat-column-position">
+                        {{sig.freeSpacesCount}}
+                      </td>
+                      <td class="mat-cell cdk-column-position mat-column-position">
+                        {{sig.occupiedSpacesCount}}
+                      </td>
+                      <td class="mat-cell cdk-column-position mat-column-position">
+                        {{sig.totalParkingSpaces}}
+                      </td>
+                    </tr>
+                  </table>
+                  <!--<table mat-table [dataSource]="dataSource_parkingSummary.data.parkingAreas">
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalParkingSpaces">
+                      <th mat-header-cell *matHeaderCellDef> Free Spaces </th>
+                      <td mat-cell *matCellDef="let element"> {{element.freeSpacesCount}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="free">
+                      <th mat-header-cell *matHeaderCellDef> Occupied Spaces </th>
+                      <td mat-cell *matCellDef="let element"> {{element.occupiedSpacesCount}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="used">
+                      <th mat-header-cell *matHeaderCellDef> Total Spaces </th>
+                      <td mat-cell *matCellDef="let element"> {{element.totalParkingSpaces}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="parkingAreaDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: parkingAreaDisplayedColumns;"></tr>
+                  </table>-->
+                </mat-card>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 main-card__areas">
+                <!--
+                <mat-card>
+                  <mat-card-title>Connectivity</mat-card-title>
+                  <table mat-table [dataSource]="dataSource_barrierArea">
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="state">
+                      <th mat-header-cell *matHeaderCellDef> State </th>
+                      <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="active">
+                      <th mat-header-cell *matHeaderCellDef> Time active </th>
+                      <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="barriersDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: barriersDisplayedColumns;"></tr>
+                  </table>
+                </mat-card>
+              -->
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-card__barrier">
+                <mat-card>
+                  <div class="row" *ngFor="let sig of _barriers.data.barriers">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                      <mat-card-title>{{sig.name}}</mat-card-title>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 {{sig.barrierState}}">
+                      <span class="ramp-icon" [class.selected]="isActive">
+                        <img class="ramp-icon__barrier" src="/assets/barrier.png" />
+                        <img class="ramp-icon__pillar" src="/assets/pillar.png" />
+                      </span>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                      <button mat-raised-button color="primary" (click)="showNotification('1','Something is wrong')"
+                        [class.selected]="isActive">{{sig.barrierState}}</button>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                      <mat-card-title>{{sig.barrierType}}</mat-card-title>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                      <mat-card-title>{{sig.lastStateChangeDate}}</mat-card-title>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                      <mat-chip-list>
+                        <mat-chip color="primary" [class.selected]="isActive"></mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </as-split-area>
+      </as-split>
+    </div>
+  </mat-card>
+</section>
+<notifier-container></notifier-container>

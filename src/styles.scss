@@ -1,0 +1,833 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~flexboxgrid/css/flexboxgrid.css";
+
+//SHARED STYLES
+body {
+  margin: 0;
+  background-color: #fafafa;
+}
+
+.row {
+  position: relative;
+}
+
+table {
+  width: 100%;
+}
+
+mat-card {
+  margin-top: 2rem;
+}
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-events {
+  width: 300px;
+  height: 200px;
+  overflow: auto;
+  border: 1px solid #555;
+}
+
+#main-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+.main-card {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.main-card.mat-card {
+  background: #f4f4f4;
+}
+
+.main-card__content__icons {
+  width: 52px;
+  height: auto;
+  background: #3f51b5;
+  position: relative;
+  top: -28px;
+  border-radius: 3px;
+}
+
+.main-card__content__icons.used {
+  width: 32px;
+  padding: 10px;
+  background-color: #adb752;
+}
+
+.main-card__content__icons.free {
+  width: 32px;
+  padding: 10px;
+  background-color: #7a8236;
+}
+
+.main-card__content__icons.cars {
+  width: 32px;
+  padding: 10px;
+  background-color: #333;
+}
+
+.main-card__content__icons.fail {
+  width: 32px;
+  padding: 10px;
+  background-color: #e24804;
+}
+
+.ramp-icon {
+  height: 100px;
+  display: block;
+  position: relative;
+}
+
+.ramp-icon .ramp-icon__barrier {
+  width: 90px;
+  position: relative;
+  left: 7px;
+  top: 40px;
+  transform: rotate(360deg);
+  transform-origin: top left;
+  transition: transform 0.5s linear;
+  z-index: 1;
+}
+
+.ramp-icon.selected .ramp-icon__barrier {
+  transform: rotate(330deg);
+  transform-origin: top left;
+  transition: transform 0.5s linear;
+}
+
+.ramp-icon .ramp-icon__pillar {
+  width: 24px;
+  position: absolute;
+  left: 0;
+  top: 30px;
+}
+
+// MATERIAL STYLING
+.mat-header-cell {
+  font-size: 14px;
+}
+
+.mat-toolbar {
+  background: #939c41 !important;
+  position: relative;
+}
+
+.mat-toolbar > span {
+  font-size: 14px;
+  right: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 220px;
+}
+
+.mat-toolbar > .logout {
+  float: right;
+  right: 20px;
+  position: absolute;
+}
+
+.mat-toolbar button {
+  height: 100%;
+  border-radius: 0;
+}
+
+.mat-toolbar button.active {
+  background-color: #7a8236;
+}
+
+.mat-tab__spaces {
+  border-right: 1px solid #ccc;
+}
+
+.mat-tab__spaces:last-child {
+  border-right: 0;
+}
+
+.mat-tab__spaces.total {
+  color: #333;
+}
+
+.mat-tab__spaces.free {
+  color: #7a8236;
+}
+
+.mat-tab__spaces.used {
+  color: #adb752;
+}
+
+.mat-tab__spaces.fail {
+  color: #e24804;
+}
+
+.mat-tab-labels {
+  margin-bottom: 20px;
+  min-width: auto !important;
+}
+.mat-tab-labels div {
+  border: 1px solid #fff;
+  background-color: #939c41;
+}
+.mat-tab-labels div.mat-tab-label-active {
+  background-color: #7a8236;
+}
+.mat-tab-labels div.mat-tab-label-active .mat-tab-label-content {
+  border: none;
+  background-color: #7a8236;
+}
+.mat-tab-labels div .mat-tab-label-content {
+  border: none;
+  color: #fff !important;
+}
+.mat-tab-header {
+  border: 0;
+}
+.mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: transparent;
+}
+.mat-tab-body-wrapper {
+  min-height: 550px;
+}
+.mat-tab-label-container {
+  flex-grow: 0 !important;
+}
+.mat-tab-label {
+  opacity: 1 !important;
+}
+.mat-chip {
+  padding: 10px;
+  min-height: 32px;
+  min-width: 32px;
+}
+.mat-chip.selected {
+  background-color: #939c41 !important;
+}
+.mat-tab-body-content {
+  overflow: hidden !important;
+}
+
+.main-card__areas {
+  font-size:14px;
+}
+
+.main-card__barrier {
+  margin-bottom: 1rem;
+}
+
+.main-card__barrier .row {
+  border-bottom: 1px solid #ccc;
+}
+
+.main-card__barrier .mat-card-title {
+  font-size: 14px;
+  position: absolute;
+  top: calc(50% - 8px);
+}
+
+.main-card__barrier .mat-raised-button {
+  position: absolute;
+  top: calc(50% - 18px);
+  border-radius: 3;
+}
+
+.mat-raised-button {
+  background-color: #939c41 !important;
+}
+
+.main-card__barrier .mat-chip {
+  position: absolute;
+  top: calc(50% - 16px);
+}
+
+.main-card__barrier mat-card {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// MAP
+#gmap_canvas {
+  width: 100%;
+  height: calc(100vh - 64px);
+}
+
+.mapouter {
+  height: 100vh;
+}
+
+.mapouter mgl-map {
+  height: 100vh;
+}
+
+.mapboxgl-marker > .barriers-parking__sector {
+  display: block;
+  width: 86px;
+  height: 47px;
+  top: 24px;
+  position: relative;
+  right: -4px;
+}
+
+.mapboxgl-marker > .barriers-parking__sector .ramp-icon__barrier {
+  width: 80px;
+  position: absolute;
+  top: 8px;
+  left: 5px;
+}
+
+.mapboxgl-marker > .barriers-parking__sector .ramp-icon__pillar {
+  width: 20px;
+  position: absolute;
+}
+
+
+.mapboxgl-marker > .sensors-parking__sensor {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.mapboxgl-marker > .sensors-parking__sensor.true {
+  background: #939c41;
+}
+
+.mapboxgl-marker > .sensors-parking__sensor.false {
+  background: #ffa35c;
+}
+
+.mapboxgl-marker > .sensors-parking__sensor.configured-false {
+  background: #999;
+}
+
+.mapboxgl-marker > span.sensors-parking__sector {
+  display: block;
+  height: 27px;
+  width: 120px;
+  transform: rotate(35deg) skew(-20deg);
+  margin-top: 15px;
+  margin-left: 10px;
+  text-align: center;
+  border: 2px solid #07ff07;
+  background: rgba(7, 255, 7, 0.15);
+}
+
+.mapboxgl-marker > span.sensors-parking__sector.full {
+  background: rgba(255, 163, 92, 0.15);
+  border: 2px solid #ffa35c;
+}
+
+.mapboxgl-marker > span.sector-205,
+.mapboxgl-marker > span.sector-221,
+.mapboxgl-marker > span.sector-222,
+.mapboxgl-marker > span.sector-223,
+.mapboxgl-marker > span.sector-224,
+.mapboxgl-marker > span.sector-225,
+.mapboxgl-marker > span.sector-226,
+.mapboxgl-marker > span.sector-227,
+.mapboxgl-marker > span.sector-228,
+.mapboxgl-marker > span.sector-229 {
+  transform: rotate(95deg) skew(30deg);
+  margin-top: 0px;
+  margin-left: 0px;
+}
+
+.mapboxgl-marker > span.sector-85,
+.mapboxgl-marker > span.sector-104,
+.mapboxgl-marker > span.sector-105,
+.mapboxgl-marker > span.sector-106,
+.mapboxgl-marker > span.sector-107,
+.mapboxgl-marker > span.sector-108,
+.mapboxgl-marker > span.sector-109,
+.mapboxgl-marker > span.sector-110,
+.mapboxgl-marker > span.sector-111,
+.mapboxgl-marker > span.sector-112 {
+  transform: rotate(95deg) skew(30deg);
+  margin-top: 0px;
+  margin-left: 0px;
+}
+
+.mapboxgl-marker > span.sector-223, 
+.mapboxgl-marker > span.sector-106 
+{
+  height: 22px;
+  margin-left: 14px;
+  margin-top: 16px;
+}
+
+.mapboxgl-marker > span.sector-224, 
+.mapboxgl-marker > span.sector-107
+{
+  height: 22px;
+  margin-left: 0px;
+  transform: rotate(93deg) skew(30deg);
+  margin-top: 16px;
+}
+
+.mapboxgl-marker > span.sector-225,
+.mapboxgl-marker > span.sector-226, 
+.mapboxgl-marker > span.sector-108,
+.mapboxgl-marker > span.sector-109
+{
+  height: 22px;
+  margin-left: -6px;
+  transform: rotate(90deg) skew(30deg);
+  margin-top: -18px;
+  width: 110px;
+}
+
+.mapboxgl-marker > span.sector-227,
+.mapboxgl-marker > span.sector-228, 
+.mapboxgl-marker > span.sector-110,
+.mapboxgl-marker > span.sector-111 
+{
+  height: 22px;
+  margin-left: -4px;
+  transform: rotate(90deg) skew(30deg);
+  margin-top: -18px;
+  width: 110px;
+}
+
+.mapboxgl-marker > span.sector-229,
+.mapboxgl-marker > span.sector-112
+{
+  height: 22px;
+  margin-left: -4px;
+  transform: rotate(87deg) skew(30deg);
+  margin-top: -18px;
+  width: 100px;
+}
+
+.mapboxgl-marker > span.sector-245,
+.mapboxgl-marker > span.sector-244,
+.mapboxgl-marker > span.sector-243,
+.mapboxgl-marker > span.sector-242,
+.mapboxgl-marker > span.sector-241,
+.mapboxgl-marker > span.sector-240,
+.mapboxgl-marker > span.sector-239,
+.mapboxgl-marker > span.sector-238,
+.mapboxgl-marker > span.sector-237,
+.mapboxgl-marker > span.sector-236,
+.mapboxgl-marker > span.sector-235,
+.mapboxgl-marker > span.sector-218 {
+  width: 100px;
+  margin-bottom: 20px;
+  margin-right: 18px;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.mapboxgl-marker > span.sector-128,
+.mapboxgl-marker > span.sector-127,
+.mapboxgl-marker > span.sector-126,
+.mapboxgl-marker > span.sector-125,
+.mapboxgl-marker > span.sector-124,
+.mapboxgl-marker > span.sector-123,
+.mapboxgl-marker > span.sector-122,
+.mapboxgl-marker > span.sector-121,
+.mapboxgl-marker > span.sector-120,
+.mapboxgl-marker > span.sector-119,
+.mapboxgl-marker > span.sector-118 {
+  width: 100px;
+  margin-bottom: 20px;
+  margin-right: 18px;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.mapboxgl-marker > span.sector-218, 
+.mapboxgl-marker > span.sector-101
+{
+  width: 100px;
+  margin-bottom: -21px;
+  margin-right: -2px;
+  margin-top: 0;
+  transform: rotate(56deg);
+  margin-left: 0;
+}
+
+.mapboxgl-marker > span.sector-245,
+.mapboxgl-marker > span.sector-128
+{
+  margin-bottom: 9px;
+  margin-right: 2px;
+  width: 93px;
+}
+
+.mapboxgl-marker > span.sector-234,
+.mapboxgl-marker > span.sector-117
+{
+  transform: rotate(-35deg);
+  margin-top: 0px;
+  margin-left: 0px;
+}
+
+.mapboxgl-marker > span.sector-235, 
+.mapboxgl-marker > span.sector-118
+{
+  width: 80px;
+}
+
+.mapboxgl-marker > span.sector-231,
+.mapboxgl-marker > span.sector-230 {
+  transform: rotate(-45deg);
+  width: 65px;
+  margin-right: 19px;
+}
+
+.mapboxgl-marker > span.sector-113,
+.mapboxgl-marker > span.sector-114 {
+  transform: rotate(-45deg);
+  width: 65px;
+  margin-right: 19px;
+}
+
+
+.mapboxgl-marker > span.sector-232, 
+.mapboxgl-marker > span.sector-115
+{
+  transform: rotate(-45deg);
+  margin-right: 110px;
+  margin-top: 16px;
+  width: 100px;
+}
+
+.mapboxgl-marker > span.sector-233, 
+.mapboxgl-marker > span.sector-116
+{
+  transform: rotate(-45deg);
+  width: 75px;
+  margin-left: 130px;
+  margin-top: 15px;
+  margin-right: 48px;
+}
+
+.mapboxgl-marker > span.sector-220,
+.mapboxgl-marker > span.sector-219,
+.mapboxgl-marker > span.sector-212{
+  transform: rotate(-31deg);
+  width: 100px;
+  margin-right: -20px;
+  margin-top: 0px;
+}
+
+.mapboxgl-marker > span.sector-103,
+.mapboxgl-marker > span.sector-102,
+.mapboxgl-marker > span.sector-95{
+  transform: rotate(-31deg);
+  width: 100px;
+  margin-right: -20px;
+  margin-top: 0px;
+}
+
+.mapboxgl-marker > span.sector-217, 
+.mapboxgl-marker > span.sector-100
+{
+  transform: rotate(52deg) skew(-6deg);
+  width: 105px;
+}
+
+.mapboxgl-marker > span.sector-216,
+.mapboxgl-marker > span.sector-215,
+.mapboxgl-marker > span.sector-214 {
+  transform: rotate(52deg) skew(-6deg);
+  width: 105px;
+  margin-left: 1px;
+  height: 32px;
+}
+
+.mapboxgl-marker > span.sector-99,
+.mapboxgl-marker > span.sector-98,
+.mapboxgl-marker > span.sector-97 {
+  transform: rotate(52deg) skew(-6deg);
+  width: 105px;
+  margin-left: 1px;
+  height: 32px;
+}
+
+.mapboxgl-marker > span.sector-213, 
+.mapboxgl-marker > span.sector-96
+{
+  transform: rotate(48deg) skew(-6deg);
+  width: 110px;
+  margin-left: 16px;
+  height: 32px;
+  margin-top: 47px;
+}
+
+.mapboxgl-marker > span.sector-208, 
+.mapboxgl-marker > span.sector-88
+{
+  transform: rotate(38deg) skew(-14deg);
+}
+
+.mapboxgl-marker > span.sector-209, 
+.mapboxgl-marker > span.sector-92
+{
+  transform: rotate(41deg) skew(-14deg);
+  width: 115px;
+  margin-top: 22px;
+}
+
+.mapboxgl-marker > span.sector-210,
+.mapboxgl-marker > span.sector-93
+{
+  transform: rotate(41deg) skew(-17deg);
+  width: 115px;
+  margin-top: 22px;
+}
+
+.mapboxgl-marker > span.sector-244, 
+.mapboxgl-marker > span.sector-127
+{
+  margin-top: -10px;
+  margin-right: 30px;
+}
+
+// CHARTS
+.ngx-charts {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  min-height: 300px;
+  width: 100%;
+}
+
+ngx-charts-bar-vertical-normalized {
+  width: 100%;
+  float: left;
+}
+
+// LOGIN
+.login {
+  width: 400px;
+  margin: 0 auto;
+  position: fixed !important;
+  top: calc(50% - 150px);
+  left: 0;
+  right: 0;
+}
+
+// SPLIT SCREEN
+.split {
+  height: 100vh;
+}
+
+.login .mat-form-field {
+  width: 100%;
+}
+
+.login .mat-card-header-text {
+  margin: 0;
+}
+
+.login .mat-card-actions {
+  height: 40px;
+}
+
+.login .mat-card-actions button {
+  margin-right: 8px !important;
+  float: right;
+}
+
+// PARKING AREA
+.parking-card__content mat-card-title {
+  padding:0 1rem;
+}
+
+// SENSORS CARD
+.sensors-card {
+  margin: 0 1rem;
+}
+
+.sensors-card > .mat-row {
+  padding: 5px 0;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.sensors-card > .mat-header-row {
+  margin: 0;
+}
+
+.sensors-card > .mat-header-row td {
+  font-weight: bold;
+  padding: 20px 0;
+  color:#000;
+}
+
+.sensors-card > .mat-row:empty {
+  display: none;
+}
+
+.sensors-card .true {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #939c41;
+  display: block;
+  margin: 3px;
+  float: left;
+  color: #fff;
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.sensors-card .false {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ffa35c;
+  display: block;
+  margin: 3px;
+  float: left;
+  color: #fff;
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.sensors-card .configured-false {
+  background-color: #ccc !important;
+}
+
+.parking__barrier {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #000;
+  display: block;
+  margin: 3px;
+  float: left;
+  color: #fff;
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+// MEDIA QUERIES
+@media only screen and (min-width: 992px) {
+  #main-content {
+    height: calc(100vh - 64px);
+  }
+  .main-card__content {
+    overflow-y: scroll;
+    height: calc(100vh - 64px);
+    padding-bottom: 2rem;
+  }
+  .split {
+    height: 100vh;
+  }
+}
+
+// NOTIFIER STYLING
+.notifier__container * {
+  box-sizing: border-box;
+}
+.notifier__container-list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+.notifier__notification {
+  display: block;
+  position: fixed;
+  visibility: hidden;
+  z-index: 10000;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.notifier__notification--material {
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: default;
+  padding-top: 11px;
+  padding-right: 26px;
+  padding-bottom: 10px;
+  padding-left: 26px;
+}
+.notifier__notification--material .notifier__notification-message {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: top;
+  line-height: 32px;
+  font-size: 15px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.notifier__notification--material .notifier__notification-button {
+  display: inline-block;
+  transition: opacity 0.2s ease;
+  opacity: 0.5;
+  margin-right: -10px;
+  margin-left: 10px;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  vertical-align: top;
+}
+.notifier__notification--material .notifier__notification-button:hover,
+.notifier__notification--material .notifier__notification-button:focus {
+  opacity: 1;
+}
+.notifier__notification--material .notifier__notification-button:active {
+  transform: scale(0.82);
+  opacity: 1;
+}
+.notifier__notification--default {
+  background-color: #444;
+  color: #fff;
+}
+.notifier__notification--default .notifier__notification-button-icon {
+  fill: #fff;
+}
+.notifier__notification--error {
+  background-color: #d9534f;
+  color: #fff;
+}
+.notifier__notification--error .notifier__notification-button-icon {
+  fill: #fff;
+}
+.notifier__notification--info {
+  background-color: #5bc0de;
+  color: #fff;
+}
+.notifier__notification--info .notifier__notification-button-icon {
+  fill: #fff;
+}
+.notifier__notification--success {
+  background-color: #5cb85c;
+  color: #fff;
+}
+.notifier__notification--success .notifier__notification-button-icon {
+  fill: #fff;
+}
+.notifier__notification--warning {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+.notifier__notification--warning .notifier__notification-button-icon {
+  fill: #fff;
+}
+
+// ALERT LOGIN
+.alert-danger {
+  background:#D9534F;
+  color:#fff;
+  padding: 10px;
+  border-radius: 5px;
+}
