@@ -14,6 +14,7 @@ export interface ParkingSensor {
   name?: string;
   occupied?: boolean;
   rssi?: number;
+  spotId?: string;
   statusMessage?: string;
   temperature?: number;
 }

@@ -3,7 +3,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
 
-import { BasicErrorControllerService } from './services/basic-error-controller.service';
 import { AuthorizationEndpointService } from './services/authorization-endpoint.service';
 import { CheckTokenEndpointService } from './services/check-token-endpoint.service';
 import { WhitelabelApprovalEndpointService } from './services/whitelabel-approval-endpoint.service';
@@ -25,7 +24,6 @@ import { ParkingRestApiControllerService } from './services/parking-rest-api-con
   declarations: [],
   providers: [
     ApiConfiguration,
-    BasicErrorControllerService,
     AuthorizationEndpointService,
     CheckTokenEndpointService,
     WhitelabelApprovalEndpointService,

@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-<<<<<<< HEAD
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -12,20 +11,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-=======
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
->>>>>>> aed10a091be6f1f07faacd509ef2f6a9c3cea105
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-<<<<<<< HEAD
       "es2018",
       "dom"
     ]
@@ -33,10 +22,5 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-=======
-      "es2017",
-      "dom"
-    ]
->>>>>>> aed10a091be6f1f07faacd509ef2f6a9c3cea105
   }
 }

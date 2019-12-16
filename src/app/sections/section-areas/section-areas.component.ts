@@ -24,8 +24,9 @@ import { DataService } from '../../services/data.service';
 import { SensorsResponse } from '../../api/models/sensors-response';
 import { ParkingSensor } from '../../api/models/parking-sensor';
 import { ParkingSpacesResponse } from '../../api/models/parking-spaces-response';
-import { ParkingSummary } from '../../api/models/parking-summary';
+import { ParkingSummaryResponse } from '../../api/models/parking-summary-response';
 import { BarriersResponse } from '../../api/models/barriers-response';
+import { AlarmsResponse } from '../../api/models/alarms-response';
 
 @Component({
   selector: 'app-section-areas',
@@ -45,6 +46,7 @@ export class SectionAreasComponent implements OnInit {
   private _parkingAreas = [];
   private _summary = [];
   private _barriers = [];
+  private _alarms = [];
 
   constructor(
     private notifier: NotifierService,
@@ -83,14 +85,14 @@ export class SectionAreasComponent implements OnInit {
     this.dataService.getBarriers().subscribe((res: BarriersResponse[]) => {
       this._barriers = res.data.barriers;
 
-      console.log("barriers")
-      console.log(res)
+      //console.log("barriers")
+      //console.log(res)
     });
 
     this.dataService.getParkingSpaces().subscribe((res: ParkingSpacesResponse[]) => {
       //PARKING SPACES
       this._parkingSpaces = res.data.parkingSpaces;
-      console.log(res)
+      //console.log(res)
       // AREAS
       this._parkingSpaces.forEach(element => {
         this._parkingAreas.push({
@@ -113,7 +115,8 @@ export class SectionAreasComponent implements OnInit {
       });
 
       //SUMMARY
-      this.dataService.getParkingSummary().subscribe((res: ParkingSummary[]) => {
+      // tslint:disable-next-line: no-shadowed-variable
+      this.dataService.getParkingSummaryResponse().subscribe((res: ParkingSummaryResponse[]) => {
         this._summary = res;
         console.log("this_summary")
         console.log(this._summary)

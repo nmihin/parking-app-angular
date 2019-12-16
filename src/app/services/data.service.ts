@@ -20,7 +20,7 @@ constructor(private httpClient : HttpClient) {}
   getParkingSpaces(){
     return this.httpClient.get(this.baseUrl + '/parkingzr/api/v1/parkingspaces?page=0&pageSize=50')
   }
-  getParkingSummary(){
+  getParkingSummaryResponse(){
       return this.httpClient.get(this.baseUrl + '/parkingzr/api/v1/parkingSummary');
   }
   getGroupedEvents(){
@@ -29,5 +29,10 @@ constructor(private httpClient : HttpClient) {}
   getSensors(){
     return this.httpClient.get(this.baseUrl + '/parkingzr/api/v1/sensors?page=0&pageSize=100');
   }
-
+  getAlarmResponse(){
+    //ALARM RESPONSE POSTMAN???
+  }
+  putBarrierStatus(){
+    //return this.http.put<Barrier>(this.baseUrl + '/parkingzr/api/v1/barriers/entryBarrier1/scheduler');
+  }
 }

@@ -20,7 +20,7 @@
             <div class="mapouter">
               <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[18]"
                 [center]="[7.757730414581299, 47.54618508300781]" [maxZoom]="18" [minZoom]="18">
-                <span *ngFor="let sig of dataSourceSensors.data">
+                <span *ngFor="let sig of dataSourceSensors['data']">
                   <mgl-marker [lngLat]="[sig.longitude,sig.latitude]">
                     <span class="sector-{{sig.id}} {{sig.occupancy}} sensors-parking__sector"></span>
                   </mgl-marker>
@@ -28,6 +28,12 @@
                     [lngLat]="[ps.longitude,ps.latitude]"><span class="{{ps.occupied}} sensors-parking__sensor"></span>
                   </mgl-marker>
                 </span>
+                <mgl-marker *ngFor="let sig of _barriers" [lngLat]="[sig.longitude,sig.latitude]">
+                  <span class="barriers-parking__sector">
+                      <img _ngcontent-gxh-c3="" class="ramp-icon__pillar" src="/assets/pillar.png">
+                      <img _ngcontent-gxh-c3="" class="ramp-icon__barrier" src="/assets/barrier.png">
+                    </span>
+                </mgl-marker>
               </mgl-map>
             </div>
           </div>
@@ -48,28 +54,28 @@
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <mat-card>
                   <img class="main-card__content__icons cars" src="/assets/parking-cars.svg" />
-                  <mat-card-title>{{_summary.data.totalSpacesCount}}</mat-card-title>
+                  <mat-card-title>{{_summary['data']?.totalSpacesCount}}</mat-card-title>
                   <mat-card-subtitle>Total Spaces</mat-card-subtitle>
                 </mat-card>
               </div>
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <mat-card>
                   <img class="main-card__content__icons free" src="/assets/parking-free.svg" />
-                  <mat-card-title>{{_summary.data.freeSpacesCount}}</mat-card-title>
+                  <mat-card-title>{{_summary['data']?.freeSpacesCount}}</mat-card-title>
                   <mat-card-subtitle>Free Spaces</mat-card-subtitle>
                 </mat-card>
               </div>
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <mat-card>
                   <img class="main-card__content__icons used" src="/assets/parking-not-free.svg" />
-                  <mat-card-title>{{_summary.data.occupiedSpacesCount}}</mat-card-title>
+                  <mat-card-title>{{_summary['data']?.occupiedSpacesCount}}</mat-card-title>
                   <mat-card-subtitle>Used Spaces</mat-card-subtitle>
                 </mat-card>
               </div>
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <mat-card>
                   <img class="main-card__content__icons fail" src="/assets/parking-cars.svg" />
-                  <mat-card-title>{{_summary.data.defectiveSpacesCount}}</mat-card-title>
+                  <mat-card-title>{{_summary['data']?.defectiveSpacesCount}}</mat-card-title>
                   <mat-card-subtitle>Sensor Fail</mat-card-subtitle>
                 </mat-card>
               </div>
@@ -78,32 +84,32 @@
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <mat-card>
                   <mat-card-title>Parking area</mat-card-title>
-                  <table class="mat-table">
-                    <tr class="mat-header-row">
-                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                  <table class="mat-table sensors-card">
+                    <tr class="mat-header-row row">
+                      <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mat-header-cell cdk-column-position mat-column-position">
                         Name
                       </td>
-                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                      <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-header-cell cdk-column-position mat-column-position">
                         Free
                       </td>
-                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                      <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-header-cell cdk-column-position mat-column-position">
                         Occupied
                       </td>
-                      <td class="mat-header-cell cdk-column-position mat-column-position">
+                      <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-header-cell cdk-column-position mat-column-position">
                         Total
                       </td>
                     </tr>
-                    <tr class="mat-row" *ngFor="let sig of _summary.data.parkingAreas">
-                      <td class="mat-cell cdk-column-position mat-column-position">
+                    <tr class="mat-row row" *ngFor="let sig of _summary['data']?.parkingAreas">
+                      <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mat-header-cell cdk-column-position mat-column-position">
                         {{sig.name}}
                       </td>
-                      <td class="mat-cell cdk-column-position mat-column-position">
+                      <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-header-cell cdk-column-position mat-column-position">
                         {{sig.freeSpacesCount}}
                       </td>
-                      <td class="mat-cell cdk-column-position mat-column-position">
+                      <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-header-cell cdk-column-position mat-column-position">
                         {{sig.occupiedSpacesCount}}
                       </td>
-                      <td class="mat-cell cdk-column-position mat-column-position">
+                      <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 mat-header-cell cdk-column-position mat-column-position">
                         {{sig.totalParkingSpaces}}
                       </td>
                     </tr>
@@ -131,6 +137,30 @@
                 </mat-card>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 main-card__areas">
+                  <mat-card>
+                    <mat-card-title>RIO module & Cloud Info</mat-card-title>
+                    <table class="mat-table sensors-card">
+                      <tr class="mat-row row">
+                        <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <b>Name:</b> {{_summary['data']?.rioModule.name}}
+                    </td>
+                    <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <b>Last State Change:</b> {{_summary['data']?.rioModule.lastStateChangeDate}}
+                    </td>
+                  </tr>
+                  <tr class="mat-row row">
+                    <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <b>Sensory Cloud Active:</b> {{_summary['data']?.sensorCloudInfo.sensorCloudActivityDateTime}}
+                    </td>
+                    <td class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <b>Sensor Cloud Status:</b> {{_summary['data']?.sensorCloudInfo.sensorCloudStatus}}
+                    </td>
+                  </tr>
+                </table>
+              </mat-card>
+
+
+
                 <!--
                 <mat-card>
                   <mat-card-title>Connectivity</mat-card-title>
@@ -156,7 +186,7 @@
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-card__barrier">
                 <mat-card>
-                  <div class="row" *ngFor="let sig of _barriers.data.barriers">
+                  <div class="row" *ngFor="let sig of _barriers">
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                       <mat-card-title>{{sig.name}}</mat-card-title>
                     </div>
@@ -168,7 +198,7 @@
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                       <button mat-raised-button color="primary" (click)="showNotification('1','Something is wrong')"
-                        [class.selected]="isActive">{{sig.barrierState}}</button>
+                        [class.selected]="isActive">Open / Close</button>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                       <mat-card-title>{{sig.barrierType}}</mat-card-title>

@@ -27,6 +27,7 @@ import { chart_data } from '../../data/chart.data';
 
 // NOTIFICATION
 import { NotifierService } from 'angular-notifier';
+import { interval } from 'rxjs/observable/interval';
 
 // AUTHENTIFICATION
 import { AuthenticationService } from '../../services/authentication.service';
@@ -41,7 +42,8 @@ import { ParkingSpace } from '../../api/models/parking-space';
 import { GroupedEventsResponse } from '../../api/models/grouped-events-response';
 import { ParkingArea } from '../../api/models/parking-area';
 import { BarriersResponse } from '../../api/models/barriers-response';
-import { ParkingSummary } from '../../api/models/parking-summary';
+import { ParkingSummaryResponse } from '../../api/models/parking-summary-response';
+import { AlarmsResponse } from '../../api/models/alarms-response';
 
 @Component({
   selector: 'app-section-home',
@@ -60,7 +62,8 @@ export class SectionHomeComponent implements OnInit {
   private _parkingSpaces = [];
   private _parkingSpacesAreas = [];
   private _summary = [];
-  dataSource_parkingSummary: MatTableDataSource<ParkingSummary>;
+  private _alarms = [];
+  dataSource_parkingSummary: MatTableDataSource<ParkingSummaryResponse>;
   dataSource_parkingArea: MatTableDataSource<ParkingArea>;
   dataSource_connectivity: MatTableDataSource<Connectivity>;
   dataSource_barrierResponse: MatTableDataSource<BarriersResponse>;
@@ -134,6 +137,7 @@ export class SectionHomeComponent implements OnInit {
 
 
   ngOnInit() {
+
     // AREAS TABLE
     this.dataService.getParkingAreas().subscribe((res: ParkingSpace[]) => {
       this._parkingAreas = res;
@@ -149,23 +153,28 @@ export class SectionHomeComponent implements OnInit {
 
     //BARRIERS
     this.dataService.getBarriers().subscribe((res: BarriersResponse[]) => {
-      this._barriers = res.data.barriers;
+      //this._barriers = res.data.barriers;
+      this._barriers = res['data'].barriers;
 
       console.log("barriers")
-      console.log(res)
+      console.log(this._barriers)
     });
 
     //SUMMARY
-    this.dataService.getParkingSummary().subscribe((res: ParkingSummary[]) => {
+    this.dataService.getParkingSummaryResponse().subscribe((res: ParkingSummaryResponse[]) => {
       this._summary = res;
       console.log(this._summary)
+      //WARNNING NOTIFICATION PARKING
+      if(this._summary.data.freeSpacesCount < 8){
+        this.notifier.notify("warning", "Warnning: there is less than 20% of parking places left!");
+      }
     });
 
     // AREAS
     this.dataService.getParkingSpaces().subscribe((res: ParkingSpacesResponse[]) => {
       console.log("res")
       console.log(res[0])
-      this._parkingSpaces = res.data.parkingSpaces;
+      this._parkingSpaces = res['data'].parkingSpaces;
       this._parkingSpaces.forEach(element => {
         this._parkingAreas.push({
           name: element.parkingAreas[0].name,

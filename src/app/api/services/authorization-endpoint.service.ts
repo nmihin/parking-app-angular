@@ -8,7 +8,6 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { ModelAndView } from '../models/model-and-view';
-import { View } from '../models/view';
 
 /**
  * Authorization Endpoint
@@ -19,7 +18,7 @@ import { View } from '../models/view';
 class AuthorizationEndpointService extends __BaseService {
   static readonly authorizeUsingGETPath = '/oauth/authorize';
   static readonly authorizeUsingHEADPath = '/oauth/authorize';
-  static readonly approveOrDenyUsingPOSTPath = '/oauth/authorize';
+  static readonly authorizeUsingPOSTPath = '/oauth/authorize';
   static readonly authorizeUsingPUTPath = '/oauth/authorize';
   static readonly authorizeUsingDELETEPath = '/oauth/authorize';
   static readonly authorizeUsingOPTIONSPath = '/oauth/authorize';
@@ -147,11 +146,9 @@ class AuthorizationEndpointService extends __BaseService {
   }
 
   /**
-   * @param params The `AuthorizationEndpointService.ApproveOrDenyUsingPOSTParams` containing the following parameters:
+   * @param params The `AuthorizationEndpointService.AuthorizeUsingPOSTParams` containing the following parameters:
    *
-   * - `user_oauth_approval`:
-   *
-   * - `approvalParameters`: approvalParameters
+   * - `parameters`: parameters
    *
    * - `name`:
    *
@@ -161,12 +158,11 @@ class AuthorizationEndpointService extends __BaseService {
    *
    * @return OK
    */
-  approveOrDenyUsingPOSTResponse(params: AuthorizationEndpointService.ApproveOrDenyUsingPOSTParams): __Observable<__StrictHttpResponse<View>> {
+  authorizeUsingPOSTResponse(params: AuthorizationEndpointService.AuthorizeUsingPOSTParams): __Observable<__StrictHttpResponse<ModelAndView>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    if (params.userOauthApproval != null) __params = __params.set('user_oauth_approval', params.userOauthApproval.toString());
-    if (params.approvalParameters != null) __params = __params.set('approvalParameters', params.approvalParameters.toString());
+    if (params.parameters != null) __params = __params.set('parameters', params.parameters.toString());
     if (params.name != null) __params = __params.set('name', params.name.toString());
     if (params.model != null) __params = __params.set('model', params.model.toString());
     if (params.complete != null) __params = __params.set('complete', params.complete.toString());
@@ -183,16 +179,14 @@ class AuthorizationEndpointService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<View>;
+        return _r as __StrictHttpResponse<ModelAndView>;
       })
     );
   }
   /**
-   * @param params The `AuthorizationEndpointService.ApproveOrDenyUsingPOSTParams` containing the following parameters:
+   * @param params The `AuthorizationEndpointService.AuthorizeUsingPOSTParams` containing the following parameters:
    *
-   * - `user_oauth_approval`:
-   *
-   * - `approvalParameters`: approvalParameters
+   * - `parameters`: parameters
    *
    * - `name`:
    *
@@ -202,9 +196,9 @@ class AuthorizationEndpointService extends __BaseService {
    *
    * @return OK
    */
-  approveOrDenyUsingPOST(params: AuthorizationEndpointService.ApproveOrDenyUsingPOSTParams): __Observable<View> {
-    return this.approveOrDenyUsingPOSTResponse(params).pipe(
-      __map(_r => _r.body as View)
+  authorizeUsingPOST(params: AuthorizationEndpointService.AuthorizeUsingPOSTParams): __Observable<ModelAndView> {
+    return this.authorizeUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as ModelAndView)
     );
   }
 
@@ -476,15 +470,14 @@ module AuthorizationEndpointService {
   }
 
   /**
-   * Parameters for approveOrDenyUsingPOST
+   * Parameters for authorizeUsingPOST
    */
-  export interface ApproveOrDenyUsingPOSTParams {
-    userOauthApproval: string;
+  export interface AuthorizeUsingPOSTParams {
 
     /**
-     * approvalParameters
+     * parameters
      */
-    approvalParameters: any;
+    parameters: any;
     name?: string;
 
     /**

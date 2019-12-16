@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # BitwareApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
@@ -6,11 +5,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Instalation
 
 Run `npm install` in the command line
-=======
-# Clientpanel
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.2.
->>>>>>> aed10a091be6f1f07faacd509ef2f6a9c3cea105
 
 ## Development server
 
@@ -22,11 +16,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-<<<<<<< HEAD
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-=======
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
->>>>>>> aed10a091be6f1f07faacd509ef2f6a9c3cea105
 
 ## Running unit tests
 

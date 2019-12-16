@@ -1,13 +1,13 @@
 /* tslint:disable */
 export interface Connectivity {
-  barrier1ActivityDateTime?: number;
-  barrier1Status?: number;
-  barrier2ActivityDateTime?: number;
-  barrier2Status?: number;
   displayActivityDateTime?: number;
-  displayStatus?: number;
+  displayStatus?: string;
+  entryBarrierActivityDateTime?: number;
+  entryBarrierStatus?: string;
+  exitBarrierActivityDateTime?: number;
+  exitBarrierStatus?: string;
   rioModuleActivityDateTime?: number;
-  rioModuleStatus?: number;
+  rioModuleStatus?: string;
   sensorCloudActivityDateTime?: number;
-  sensorCloudStatus?: number;
+  sensorCloudStatus?: string;
 }
