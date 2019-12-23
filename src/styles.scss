@@ -213,6 +213,9 @@ mat-card {
 .mat-chip.selected {
   background-color: #939c41 !important;
 }
+.open .mat-chip {
+  background-color: #939c41 !important;
+}
 .mat-tab-body-content {
   overflow: hidden !important;
 }
@@ -255,6 +258,16 @@ mat-card {
   padding-bottom: 0;
 }
 
+.main-card__barrier .open .ramp-icon__barrier {
+  transform: rotate(330deg);
+}
+
+// HOME - SECTION
+.home-section .mat-tab-labels {
+  margin:0;
+  padding: 1rem 1rem 0 1rem;
+}
+
 // MAP
 #gmap_canvas {
   width: 100%;
@@ -279,6 +292,21 @@ mat-card {
 }
 
 .mapboxgl-marker > .barriers-parking__sector .ramp-icon__barrier {
+  width: 90px;
+  position: relative;
+  left: 7px;
+  top: 40px;
+  transform: rotate(360deg);
+  transform-origin: top left;
+  transition: transform 0.5s linear;
+  z-index: 1;
+}
+
+.mapboxgl-marker > .barriers-parking__sector.open .ramp-icon__barrier {
+  transform: rotate(330deg);
+}
+
+.mapboxgl-marker > .barriers-parking__sector .ramp-icon__barrier {
   width: 80px;
   position: absolute;
   top: 8px;
@@ -299,11 +327,11 @@ mat-card {
 }
 
 .mapboxgl-marker > .sensors-parking__sensor.true {
-  background: #939c41;
+  background: #ffa35c;
 }
 
 .mapboxgl-marker > .sensors-parking__sensor.false {
-  background: #ffa35c;
+  background: #939c41;
 }
 
 .mapboxgl-marker > .sensors-parking__sensor.configured-false {
@@ -322,9 +350,11 @@ mat-card {
   background: rgba(7, 255, 7, 0.15);
 }
 
-.mapboxgl-marker > span.sensors-parking__sector.full {
-  background: rgba(255, 163, 92, 0.15);
-  border: 2px solid #ffa35c;
+.mapboxgl-marker > span.sensors-parking__sector.full, 
+.mapboxgl-marker > span.sensors-parking__sector.occupied
+{
+  background: rgba(255, 163, 92, 0.15) !important;
+  border: 2px solid #ffa35c !important;
 }
 
 .mapboxgl-marker > span.sector-205,
@@ -602,6 +632,7 @@ mat-card {
   width: 100%;
 }
 
+
 ngx-charts-bar-vertical-normalized {
   width: 100%;
   float: left;
@@ -672,7 +703,7 @@ ngx-charts-bar-vertical-normalized {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #939c41;
+  background-color: #ffa35c;
   display: block;
   margin: 3px;
   float: left;
@@ -686,7 +717,7 @@ ngx-charts-bar-vertical-normalized {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #ffa35c;
+  background-color: #939c41;
   display: block;
   margin: 3px;
   float: left;
@@ -698,6 +729,34 @@ ngx-charts-bar-vertical-normalized {
 
 .sensors-card .configured-false {
   background-color: #ccc !important;
+}
+
+.sensors-card.alarms .warning > span {
+  padding:5px 15px;
+  background-color:#ffae42;
+  border-radius: 5px;
+  color:#fff;
+}
+
+.sensors-card.alarms .error > span {
+  padding:5px 15px;
+  background-color:#d9534f;
+  border-radius: 5px;
+  color:#fff;
+}
+
+.sensors-card.alarms .info > span {
+  padding:5px 15px;
+  background-color:#5bc0de;
+  border-radius: 5px;
+  color:#fff;
+}
+
+.sensors-card.alarms .success > span {
+  padding:5px 15px;
+  background-color:#5cb85c;
+  border-radius: 5px;
+  color:#fff;
 }
 
 .parking__barrier {

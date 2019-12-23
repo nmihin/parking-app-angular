@@ -1,0 +1,23 @@
+<div class="mapouter">
+    <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[18]"
+      [center]="[7.757730414581299, 47.54618508300781]" [maxZoom]="18" [minZoom]="18">
+      <span *ngFor="let sig of _parkingSpaces">
+        <span *ngFor="let sen of sig.sensors">
+          <mgl-marker [lngLat]="[sen.longitude,sen.latitude]">
+            <span class="{{sen.occupied}} configured-{{sen.configured}} sensors-parking__sensor"></span>
+          </mgl-marker>
+        </span>
+        <span>
+          <mgl-marker [lngLat]="[sig.longitude,sig.latitude]">
+            <span class="sector-{{sig.id}} {{sig.occupancy}} sensors-parking__sector"></span>
+          </mgl-marker>
+        </span>
+      </span>
+      <mgl-marker *ngFor="let sig of _barriers" [lngLat]="[sig.longitude,sig.latitude]">
+        <span class="barriers-parking__sector {{sig.barrierState}}">
+            <img _ngcontent-gxh-c3="" class="ramp-icon__pillar" src="/assets/pillar.png">
+            <img _ngcontent-gxh-c3="" class="ramp-icon__barrier" src="/assets/barrier.png">
+          </span>
+      </mgl-marker>
+    </mgl-map>
+  </div>

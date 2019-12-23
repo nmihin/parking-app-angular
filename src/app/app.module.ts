@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -109,10 +109,13 @@ import { AngularSplitModule } from 'angular-split';
 import { SectionHomeComponent } from './sections/section-home/section-home.component';
 import { SectionAreasComponent } from './sections/section-areas/section-areas.component';
 import { SectionLoginComponent } from './sections/section-login/section-login.component';
+import { SectionChangelogComponent } from './sections/section-changelog/section-changelog.component';
 
 // API MODULE
 import { ApiModule } from './api/api.module';
 import { HttpModule } from '@angular/http';
+import { SectionMapComponent } from './sections/shared/section-map/section-map.component';
+
 
 
 @NgModule({
@@ -122,7 +125,9 @@ import { HttpModule } from '@angular/http';
     SectionAreasComponent,
     SectionHomeComponent,
     SectionLoginComponent,
-    OrderByPipe
+    OrderByPipe,
+    SectionChangelogComponent,
+    SectionMapComponent
   ],
   imports: [
     // tslint:disable-next-line: deprecation

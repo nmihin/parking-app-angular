@@ -1,14 +1,16 @@
 import { Injectable } from "@angular/core";
-import { HttpClient,HttpHeaders,HttpClientModule,HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpClientModule, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { ApiConfiguration } from '../../app/api/api-configuration';
+
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private apiConfiguration: ApiConfiguration) {
     this.currentUserSubject = new BehaviorSubject<any>(
       JSON.parse(localStorage.getItem('currentUser'))
     );
@@ -20,8 +22,6 @@ export class AuthenticationService {
   }
 
   login(username, password) {
-
-    const url = 'http://dev.aldo.tech:8080/oauth/token';
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -34,7 +34,7 @@ export class AuthenticationService {
       .set('username', username)
       .set('password', password);
 
-    return this.http.post<any>(url, body.toString(), httpOptions).pipe(
+    return this.http.post<any>(this.apiConfiguration.rootUrl + '/oauth/token', body.toString(), httpOptions).pipe(
       map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -42,19 +42,6 @@ export class AuthenticationService {
         return user;
       })
     );
-
-    //return this.http.post<any>('http://parkingzrjwtci:prkzr778112@dev.aldo.tech:8080/oauth/token?grant_type=password&username=user&password=pass',{})
-
-    /*
-        return this.http.post<any>('${config.apiUrl}/users/authenticate', { username, password })
-            .pipe(map(user => {
-              console.log(user)
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                return user;
-            }));
-    */
   }
 
 
