@@ -37,7 +37,7 @@
     "mapbox-gl": "^0.54.0",
     "ngx-mapbox-gl": "^4.2.0",
     "ngx-order-pipe": "^2.0.4",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "pipes-module": "^1.0.1",
     "rx-subject": "^3.1.0",
     "rxjs": "~6.4.0",
